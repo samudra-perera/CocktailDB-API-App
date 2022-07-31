@@ -5,19 +5,14 @@ const drinkImage = document.querySelector('.drinkImage')
 const ingredients = document.querySelector('.ingredients')
 const instructions = document.querySelector('.instructions')
 
-
-function fetchDrink () {
-        let drink = drinkSearch.value
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`)
-        .then(res => res.json())
-        .then(data => {
-            displayData(data)
-        })
-        .catch(err => {
-            console.log(`error ${err}`)
-        })
-    }
-
+const fetchDrink = async () => {
+    let drink = drinkSearch.value
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
+    const res = await fetch(url)
+    const data = await res.json()
+    console.log(data)
+    displayData(data)
+}
 
 function displayData(data) {
     drinkName.innerText = data.drinks[0].strDrink
@@ -26,8 +21,15 @@ function displayData(data) {
     for(let i = 1; i < 15; i++) {
         if(data.drinks[0][`strIngredient${i}`] == null) {
             break
+        } 
+        let item = document.createElement('li')
+        item.id = '1'
+        ingredients.appendChild(item)
+        if (data.drinks[0][`strMeasure${i}`] == null) {
+            item.innerText = data.drinks[0][`strIngredient${i}`]
+        } else {
+            item.innerText = data.drinks[0][`strMeasure${i}`] + ' ' + data.drinks[0][`strIngredient${i}`]
         }
-        document.getElementById(`${i}`).innerText = data.drinks[0][`strIngredient${i}`]
     }
     instructions.innerText = data.drinks[0].strInstructions
 }
@@ -36,10 +38,20 @@ searchButton.addEventListener('click', function() {
     fetchDrink()
 })
 
-function createDOMElements() {
-    for(let i = 0; i < data.length; i++) {
-        
-    }
+function createDrinkCard() {
+    const cocktailInnerHTML = `
+    <div class="carousel container">
+        <h2 class="drinkName">Drink</h2>
+        <img src=" " alt="Drink Image" class="drinkImage">
+        <ul class="ingredients">
+            <li id="1">placeholder</li>
+            <li id="2">placeholder</li>
+            <li id="3">placeholder</li>
+            <li id="4">placeholder</li>
+        </ul>
+        <p class="instructions">Placeholder Instructions</p>
+    </div>
+    `
 }
 
 // Create an for Loop that appends DOM elements to each div within Carousel
