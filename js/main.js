@@ -1,57 +1,60 @@
 const drinkSearch = document.querySelector('.drinkSearch')
 const searchButton = document.querySelector('.searchButton')
-const drinkName = document.querySelector('.drinkName')
-const drinkImage = document.querySelector('.drinkImage')
-const ingredients = document.querySelector('.ingredients')
-const instructions = document.querySelector('.instructions')
 
 const fetchDrink = async () => {
     let drink = drinkSearch.value
     const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
     const res = await fetch(url)
     const data = await res.json()
-    console.log(data)
-    displayData(data)
-}
-
-function displayData(data) {
-    drinkName.innerText = data.drinks[0].strDrink
-    drinkImage.src = data.drinks[0].strDrinkThumb
-    //iterates through the max # of elements in the object and returns on valid strings
-    for(let i = 1; i < 15; i++) {
-        if(data.drinks[0][`strIngredient${i}`] == null) {
-            break
-        } 
-        let item = document.createElement('li')
-        item.id = '1'
-        ingredients.appendChild(item)
-        if (data.drinks[0][`strMeasure${i}`] == null) {
-            item.innerText = data.drinks[0][`strIngredient${i}`]
-        } else {
-            item.innerText = data.drinks[0][`strMeasure${i}`] + ' ' + data.drinks[0][`strIngredient${i}`]
-        }
-    }
-    instructions.innerText = data.drinks[0].strInstructions
+    displayData2(data)
 }
 
 searchButton.addEventListener('click', function() {
     fetchDrink()
 })
 
-function createDrinkCard() {
+function createDrinkCard(i) {
+    const cocktailEle = document.createElement('div')
+    cocktailEle.classList.add('cocktail')
     const cocktailInnerHTML = `
-    <div class="carousel container">
-        <h2 class="drinkName">Drink</h2>
-        <img src=" " alt="Drink Image" class="drinkImage">
-        <ul class="ingredients">
-            <li id="1">placeholder</li>
-            <li id="2">placeholder</li>
-            <li id="3">placeholder</li>
-            <li id="4">placeholder</li>
-        </ul>
-        <p class="instructions">Placeholder Instructions</p>
-    </div>
-    `
+        <div class="carousel container">
+            <h2 class="drinkName${i}">Drink</h2>
+            <img src=" " alt="Drink Image" id = "drinkImage" class="drinkImage${i}">
+            <ul class="ingredients${i}">
+            </ul>
+            <p class="instructions${i}">Placeholder Instructions</p>
+        </div>
+        `
+    cocktailEle.innerHTML = cocktailInnerHTML
+    document.getElementById('drinksContainer').appendChild(cocktailEle)
 }
 
-// Create an for Loop that appends DOM elements to each div within Carousel
+// This is the function that will display the data to the dynamically created HTML elements from CreateDrinksCard()
+function displayData2(data) {
+    //iterates through the drinks array and creates HTML elements
+    for(let j = 0; j < data.drinks.length; j++) {
+        createDrinkCard(j)
+        let cocktail = data.drinks[j]
+        let drinkName = document.querySelector(`.drinkName${j}`)
+        let drinkImage = document.querySelector(`.drinkImage${j}`)
+        let instructions = document.querySelector(`.instructions${j}`)
+        let ingredients = document.querySelector(`.ingredients${j}`)
+        drinkName.innerText = cocktail.strDrink
+        drinkImage.src = cocktail.strDrinkThumb
+        instructions.innerText = cocktail.strInstructions
+
+        for(let i = 1; i < 15; i++) {
+            if(data.drinks[j][`strIngredient${i}`] == null) {
+                break
+            } 
+            let item = document.createElement('li')
+            item.id = '1'
+            ingredients.appendChild(item)
+            if (data.drinks[j][`strMeasure${i}`] == null) {
+                item.innerText = data.drinks[j][`strIngredient${i}`]
+            } else {
+                item.innerText = data.drinks[j][`strMeasure${i}`] + ' ' + data.drinks[j][`strIngredient${i}`]
+            }
+        }
+    }
+}
