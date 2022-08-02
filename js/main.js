@@ -17,8 +17,9 @@ searchButton.addEventListener('click', function() {
 function createDrinkCard(i) {
     const cocktailEle = document.createElement('div')
     cocktailEle.classList.add('cocktail')
+    cocktailEle.classList.add('slide')
     const cocktailInnerHTML = `
-        <div class="carousel container">
+        <div class="carouselContainer">
             <h2 class="drinkName${i}" id="drinkNames">Drink</h2>
             <img src=" " alt="Drink Image" id = "drinkImage" class="drinkImage${i}">
             <h3 id="ingredientsTitle">Ingredients</h3>
@@ -60,3 +61,24 @@ function displayData2(data) {
         }
     }
 }
+
+/* NEW*/
+
+const buttons = document.querySelectorAll("[data-carousel-button]")
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+       const offset = button.dataset.carouselButton === 'next' ? 1 : -1; 
+       const slides = button
+       .closest("[data-carousel]")
+       .querySelector("[data-slides]")
+
+       const activeSlide = slides.querySelector("[data-active]")
+       let newIndex = [...slides.children].indexOf(activeSlide) + offset
+       if(newIndex < 0) newIndex = slides.children.length -1
+       if(newIndex >= slides.children.length) newIndex = 0
+
+       slides.children[newIndex].dataset.active = true
+       delete activeSlide.dataset.active
+    })
+})
