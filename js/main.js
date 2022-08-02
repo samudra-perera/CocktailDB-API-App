@@ -6,6 +6,7 @@ const fetchDrink = async () => {
     const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
     const res = await fetch(url)
     const data = await res.json()
+    console.log(data)
     displayData2(data)
 }
 
@@ -18,11 +19,12 @@ function createDrinkCard(i) {
     cocktailEle.classList.add('cocktail')
     const cocktailInnerHTML = `
         <div class="carousel container">
-            <h2 class="drinkName${i}">Drink</h2>
+            <h2 class="drinkName${i}" id="drinkNames">Drink</h2>
             <img src=" " alt="Drink Image" id = "drinkImage" class="drinkImage${i}">
-            <ul class="ingredients${i}">
-            </ul>
-            <p class="instructions${i}">Placeholder Instructions</p>
+            <h3 id="ingredientsTitle">Ingredients</h3>
+            <ul class="ingredients${i}" id="ingredients"></ul>
+            <h3 id="instructionsTitle">Instructions</h3>
+            <p class="instructions${i}" id=""instructions>Placeholder Instructions</p>
         </div>
         `
     cocktailEle.innerHTML = cocktailInnerHTML

@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 img.drinkImage {
     max-height: 35vh;
     max-width: 50vh;
@@ -6,4 +10,34 @@ img.drinkImage {
 #drinkImage {
     max-height: 35vh;
     max-width: 50vh;
+    display: block;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cocktail {
+    background: aliceblue;
+    width: 50vh;
+    padding: 15px;
+    border-radius: 5%;
+    margin-bottom: 20px;
+}
+
+h2#drinkNames {
+    text-align: center;
+}
+
+h3#ingredientsTitle {
+    text-align: center;
+}
+
+h3#instructionsTitle {
+    text-align: center;
+}
+
+ul#ingredients {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
