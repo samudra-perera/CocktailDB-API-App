@@ -26,6 +26,7 @@ img.drinkImage {
     padding: 15px;
     border-radius: 5%;
     margin-bottom: 20px;
+    position: absolute;
 }
 
 h2#drinkNames {

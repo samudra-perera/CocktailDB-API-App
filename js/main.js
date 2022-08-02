@@ -36,7 +36,12 @@ function createDrinkCard(i) {
 function displayData2(data) {
     //iterates through the drinks array and creates HTML elements
     for(let j = 0; j < data.drinks.length; j++) {
+        // To ensure that the first element is displayed without hardcoding data-active = true into the cocktailInnerHtml
         createDrinkCard(j)
+        if(j == 0) {
+            document.querySelector('.slide').dataset.active = true
+        }
+
         let cocktail = data.drinks[j]
         let drinkName = document.querySelector(`.drinkName${j}`)
         let drinkImage = document.querySelector(`.drinkImage${j}`)
@@ -62,8 +67,8 @@ function displayData2(data) {
     }
 }
 
-/* NEW*/
 
+// Creating the carousel -- got this code from Youtube and repurposed my code to work with it
 const buttons = document.querySelectorAll("[data-carousel-button]")
 
 buttons.forEach(button => {
@@ -72,9 +77,11 @@ buttons.forEach(button => {
        const slides = button
        .closest("[data-carousel]")
        .querySelector("[data-slides]")
-
+       console.log(slides)
        const activeSlide = slides.querySelector("[data-active]")
+       console.log(activeSlide)
        let newIndex = [...slides.children].indexOf(activeSlide) + offset
+       console.log(newIndex)
        if(newIndex < 0) newIndex = slides.children.length -1
        if(newIndex >= slides.children.length) newIndex = 0
 
