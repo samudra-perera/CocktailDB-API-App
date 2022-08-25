@@ -8,36 +8,25 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Cocktail Database</h1>
-    <input type="text" class="drinkSearch" name="Search" placeholder="Search...">
-    <input type="button" class="searchButton" name="Seach" value="Search">
-    <div id="containerMain" data-carousel>
-        <button class="carousel-button prev" data-carousel-button="prev">&#8678;</button>
-        <button class="carousel-button next" data-carousel-button="next">&#8680;</button>
-        <div id="drinksContainer" data-slides>
+    <div class="container">
+        <div class="container2">
+            <h1>Cocktail Database</h1>
+            <input type="text" class="drinkSearch" name="Search" placeholder="Search...">
+            <input type="button" class="searchButton" name="Seach" value="Search">
 
+            <div id="containerMain" data-carousel>
+                <div id="drinksContainer" data-slides></div>
+                <div class="buttons">
+                    <div>
+                        <button class="carousel-button prev" data-carousel-button="prev">&#8678;</button>
+                    </div>
+                    <div>
+                        <button class="carousel-button next" data-carousel-button="next">&#8680;</button>            
+                    </div>
+                </div>
+            </div>    
         </div>
     </div>
-
-
-
-<!--
-    <div class="carousel" data-carousel>
-        <button class="carousel-button prev" data-carousel-button="prev">&#8678;</button>
-        <button class="carousel-button next" data-carousel-button="next">&#8680;</button>
-        <ul data-slides>
-            <li class="slide" data-active>
-                <img src="https://source.unsplash.com/2_Zn9zhGEG0" alt="space">
-            </li>
-            <li class="slide">
-                <img src="https://source.unsplash.com/8bMdVHtZnQs" alt="space">
-            </li>
-            <li class="slide">
-                <img src="https://source.unsplash.com/2_Zn9zhGEG0" alt="space">
-            </li>
-            
-        </ul>    
-    </div>
--->
+    
 <script src="js/main.js"></script>
 </html>
