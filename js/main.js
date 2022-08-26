@@ -31,7 +31,7 @@ function createDrinkCard(i) {
             <h3 id="ingredientsTitle">Ingredients</h3>
             <ul class="ingredients${i}" id="ingredients"></ul>
             <h3 id="instructionsTitle">Instructions</h3>
-            <p class="instructions${i}" id=""instructions>Placeholder Instructions</p>
+            <p class="instructions${i}" id="instructions">Placeholder Instructions</p>
         </div>
         `
     cocktailEle.innerHTML = cocktailInnerHTML
@@ -78,6 +78,8 @@ function displayData2(data) {
             }
         }
     }
+    //Unhiding the prev and next buttons after the search button is clicked
+    document.querySelector('.buttons').style.visibility = 'visible'
 }
 
 
