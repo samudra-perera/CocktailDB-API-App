@@ -3,21 +3,20 @@ const drinkSearch = document.querySelector('.drinkSearch')
 const searchButton = document.querySelector('.searchButton')
 const buttons = document.querySelectorAll("[data-carousel-button]")
 
+//The fetchDrink function used to call the cocktailDB API
 const fetchDrink = async () => {
     let drink = drinkSearch.value
     try {
         const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
         const res = await fetch(url)
         const data = await res.json()
+        console.log(data)
+        //After the data is received, call and pass in the data into the displayData2 function
         displayData2(data)
-    } catch {
-
+    } catch (err){
+        console.log(err)
     }
 }
-
-searchButton.addEventListener('click', function() {
-    fetchDrink()
-})
 
 //This function creates the cards using an HTML template that the API data will be stored in
 function createDrinkCard(i) {
@@ -51,6 +50,7 @@ function displayData2(data) {
         // To ensure that the first element is displayed without hardcoding data-active = true into the cocktailInnerHtml
         // Passes in j to createDrinkCard and which produces the template for the cocktail card for every element in the array
         createDrinkCard(j)
+        //Sets the data attribute for the first card as true so it is visible 
         if(j == 0) {
             document.querySelector('.slide').dataset.active = true
         }
@@ -64,6 +64,7 @@ function displayData2(data) {
         drinkImage.src = cocktail.strDrinkThumb
         instructions.innerText = cocktail.strInstructions
 
+        //Iterates through the ingredients and creates an li which is then appended to the ul...when ingredients is null break the loop
         for(let i = 1; i < 15; i++) {
             if(data.drinks[j][`strIngredient${i}`] == null) {
                 break
@@ -71,6 +72,7 @@ function displayData2(data) {
             let item = document.createElement('li')
             item.id = '1'
             ingredients.appendChild(item)
+            //This conditional checks whether there is any measure in the ingredients
             if (data.drinks[j][`strMeasure${i}`] == null) {
                 item.innerText = data.drinks[j][`strIngredient${i}`]
             } else {
@@ -83,7 +85,7 @@ function displayData2(data) {
 }
 
 
-// Creating the carousel -- done using the help of youtube
+// Creating the carousel -- done using the help of youtube (https://www.youtube.com/watch?v=9HcxHDS2w1s)
 buttons.forEach(button => {
     //adds event listener to each button
     button.addEventListener("click", () => {
@@ -103,4 +105,9 @@ buttons.forEach(button => {
        slides.children[newIndex].dataset.active = true
        delete activeSlide.dataset.active
     })
+})
+
+//When the seachbutton is clicked call the fetchDrink function
+searchButton.addEventListener('click', function() {
+    fetchDrink()
 })
