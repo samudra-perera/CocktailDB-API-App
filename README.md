@@ -1,7 +1,7 @@
 # CocktailDB Carousel 
 Find your favourite drinks and view them in a beautiful carousel cards with photos, ingredients, and instructions.
 
-**Link to project:** http://recruiters-love-seeing-live-demos.com/
+**Link to project:** https://super-basbousa-4fa5bb.netlify.app/
 
 ![alt tag](http://placecorgi.com/1200/650)
 
